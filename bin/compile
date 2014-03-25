@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "Path: $1"
+echo "ENV_DIR: $3"
+
 # exit quickly
 set -e
 
@@ -13,18 +16,25 @@ cd $1
 # $3 is the ENV_DIR
 ENV_DIR=$3
 
+echo "Ready to check"
 # Set DO_DEPLOY as the value of the file
-[ -f $ENV_DIR/DO_DEPLOY ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
+[ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
+
+echo "Was there a file?"
+echo "DO_DEPLOY: $DO_DEPLOY"
 
 # If there was no file, move along
 [ -z "${!DO_DEPLOY}" ] && exit 0
 
+echo "Was there a '1'"
 # If the file contents weren't "1", move along
 [ "$DO_DEPLOY" -ne "1" ] && exit 0
 
+echo "Ready to go"
 # Need node on the path
 PATH=$PATH:$1/vendor/node/bin
 
+echo $PATH
 # We have what we want
 echo "----------> Deploying assets"
 ./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent
