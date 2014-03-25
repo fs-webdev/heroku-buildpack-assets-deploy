@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "AssetManager cake:deploy buildpack"
+echo "assets-deploy"
 exit 0
