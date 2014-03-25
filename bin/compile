@@ -1,13 +1,32 @@
 #!/bin/sh
 
-env_dir=$3
-whitelist_regex=${2:-''}
-blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-if [ -d "$env_dir" ]; then
-  for e in $(ls $env_dir); do
-    echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-    echo 'export "$e=$(cat $env_dir/$e)"'
-    export "$e=$(cat $env_dir/$e)"
-    :
-  done
-fi
+# exit quickly
+set -e
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+# enter the BUILD_DIR
+cd $1
+
+# $3 is the ENV_DIR
+ENV_DIR=$3
+
+# Set DO_DEPLOY as the value of the file
+[ -f $ENV_DIR/DO_DEPLOY ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
+
+# If there was no file, move along
+[ -z "${!DO_DEPLOY}" ] && exit 0
+
+# If the file contents weren't "1", move along
+[ "$DO_DEPLOY" -ne "1" ] && exit 0
+
+# Need node on the path
+PATH=$PATH:$1/vendor/node/bin
+
+# We have what we want
+echo "----------> Deploying assets"
+./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent
+
+exit 0

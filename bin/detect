@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "Export the environment variables early"
+echo "AssetManager cake:deploy buildpack"
 exit 0
