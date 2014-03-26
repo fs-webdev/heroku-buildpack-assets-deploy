@@ -28,7 +28,7 @@ echo "DO_DEPLOY: $DO_DEPLOY"
 
 echo "Was there a '1'"
 # If the file contents weren't "1", move along
-[ "$DO_DEPLOY" -ne "1" ] && exit 0
+[ "$DO_DEPLOY" -ne "1" ] && echo "Skipping asset deployment for DO_DEPLOY != '1'" && exit 0
 
 echo "Ready to go"
 # Need node on the path
