@@ -24,7 +24,7 @@ echo "Was there a file?"
 echo "DO_DEPLOY: $DO_DEPLOY"
 
 # If there was no file, move along
-[ ! -z "$DO_DEPLOY" ] && exit 0
+[ -z "$DO_DEPLOY" ] && exit 0
 
 echo "Was there a '1'"
 # If the file contents weren't "1", move along
