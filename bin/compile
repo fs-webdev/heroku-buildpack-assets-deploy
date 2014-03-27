@@ -27,6 +27,8 @@ PATH=$PATH:$1/vendor/node/bin
 
 # We have what we want
 echo "----------> Deploying assets"
-./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent
+./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent && exit 0
 
-exit 0
+# If it didn't exit with the assets deployment, something happened
+echo "Something went wrong with the deploy"
+exit 1
