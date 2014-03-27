@@ -8,6 +8,7 @@ indent() {
 }
 
 pwd
+ls -la
 
 # enter the BUILD_DIR
 cd $1
@@ -16,6 +17,7 @@ cd $1
 ENV_DIR=$3
 
 pwd
+ls -la
 
 # Set DO_DEPLOY as the value of the file
 [ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
@@ -31,7 +33,7 @@ PATH=$PATH:$1/vendor/node/bin
 
 # We have what we want
 echo "----------> Deploying assets"
-./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent && exit 0
+[ -f "./node_modules/frontier-build-tools/node_modules/.bin/cake"] && ./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent && exit 0
 
 # If it didn't exit with the assets deployment, something happened
 echo "Something went wrong with the deploy"
