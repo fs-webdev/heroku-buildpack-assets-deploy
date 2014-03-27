@@ -18,6 +18,9 @@ ENV_DIR=$3
 
 pwd
 ls -la
+ls -la ./node_modules
+ls -la ./node_modules/frontier-build-tools/node_modules
+ls -la ./node_modules/frontier-build-tools/node_modules/.bin
 
 # Set DO_DEPLOY as the value of the file
 [ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
