@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# exit quickly
-set -e
+# fail fast
+set -o errexit
+set -o pipefail
 
 indent() {
   sed -u 's/^/       /'
