@@ -31,7 +31,7 @@ echo "----------> Deploying assets"
 [ -f "./node_modules/frontier-build-tools/node_modules/gulp/bin/gulp.js"] && ./node_modules/frontier-build-tools/node_modules/gulp/bin/gulp.js dist | indent && exit 0
 
 # If they have their own version of coffee-script, looking in frontier-build-tools will fail
-[ -f "./node_modules/.bin/cake" ] && ./node_modules/.bin/cake assets:deploy | indent && exit 0
+# [ -f "./node_modules/.bin/cake" ] && ./node_modules/.bin/cake assets:deploy | indent && exit 0
 
 # If it didn't exit with the assets deployment, something happened
 echo "Something went wrong with the deploy"
