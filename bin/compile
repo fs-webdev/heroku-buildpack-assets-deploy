@@ -27,20 +27,8 @@ PATH=$PATH:$1/vendor/node/bin
 
 # We have what we want
 echo "----------> Deploying assets"
-
-echo "NODE_MODULES"
-ls ./node_modules
-echo "NODE_MODULES/FRONTIER-BUILD-TOOLS"
-ls ./node_modules/frontier-build-tools
-echo "NODE_MODULES/FRONTIER-BUILD-TOOLS/NODE_MODULES"
-ls ./node_modules/frontier-build-tools/node_modules
-echo "NODE_MODULES/FRONTIER-BUILD-TOOLS/NODE_MODULES/GULP"
-ls ./node_modules/frontier-build-tools/node_modules/gulp
-echo "NODE_MODULES/FRONTIER-BUILD-TOOLS/NODE_MODULES/GULP/BIN"
-ls ./node_modules/frontier-build-tools/node_modules/gulp/bin
-
 #[ -f "./node_modules/frontier-build-tools/node_modules/.bin/cake" ] && ./node_modules/frontier-build-tools/node_modules/.bin/cake assets:deploy | indent && exit 0
-[ -f "./node_modules/frontier-build-tools/node_modules/gulp/bin/gulp.js" ] && ./node_modules/frontier-build-tools/node_modules/gulp/bin/gulp.js dist | indent && exit 0
+[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist | indent && exit 0
 
 # If they have their own version of coffee-script, looking in frontier-build-tools will fail
 # [ -f "./node_modules/.bin/cake" ] && ./node_modules/.bin/cake assets:deploy | indent && exit 0
