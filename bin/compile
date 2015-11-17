@@ -25,8 +25,18 @@ ENV_DIR=$3
 # Need node on the path
 PATH=$PATH:$1/vendor/node/bin
 
+# pipe errors to file to check for errors
 echo "----------> Compiling assets"
-[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cnd-url | indent && exit 0
+[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js build 2> errors.txt | indent
+
+# exit if errors exist
+if [ -s errors.txt ]; then
+  cat errors.txt
+  exit 1
+fi
+
+# remove afterwards
+rm errors.txt
 
 # We have what we want
 echo "----------> Deploying assets"
