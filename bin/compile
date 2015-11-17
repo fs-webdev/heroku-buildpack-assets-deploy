@@ -27,7 +27,7 @@ ENV_DIR=$3
 PATH=$PATH:$1/vendor/node/bin
 
 echo "----------> Compiling assets"
-[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cnd-url | indent
+[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdn-url | indent
 
 # We have what we want
 echo "----------> Deploying assets"
