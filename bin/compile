@@ -14,8 +14,9 @@ cd $1
 # $3 is the ENV_DIR
 ENV_DIR=$3
 
-# Set DO_DEPLOY as the value of the file
+# Set environment variables
 [ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
+[ -f "$ENV_DIR/CDN_BASE_URL" ] && export "CDN_BASE_URL=$(cat $ENV_DIR/CDN_BASE_URL)"
 
 # If there was no file, move along
 [ -z "$DO_DEPLOY" ] && exit 0
@@ -27,7 +28,7 @@ ENV_DIR=$3
 PATH=$PATH:$1/vendor/node/bin
 
 echo "----------> Compiling assets"
-[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdn-url | indent
+[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdn-url=$CDN_BASE_URL | indent
 
 # We have what we want
 echo "----------> Deploying assets"
