@@ -28,8 +28,7 @@ ENV_DIR=$3
 PATH=$PATH:$1/vendor/node/bin
 
 echo "----------> Compiling assets"
-# keep the build directory so that we can run unit tests against it without rebuilding
-[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdnUrl=$CDN_BASE_URL --keepBuildDir | indent
+[ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdnUrl=$CDN_BASE_URL | indent
 
 # We have what we want
 echo "----------> Deploying assets"
