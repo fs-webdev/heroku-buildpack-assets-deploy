@@ -7,17 +7,24 @@ indent() {
   sed -u 's/^/       /'
 }
 
+export_env_dir() {
+  env_dir=$1
+  whitelist_regex=${2:-'^(DO_DEPLOY|TAAS_EX)$'}
+  blacklist_regex=${3:-'.^'}
+  if [ -d "$env_dir" ]; then
+    for e in $(ls $env_dir); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $env_dir/$e)"
+      :
+    done
+  fi
+}
+
 # enter the BUILD_DIR
 cd $1
 
 # $3 is the ENV_DIR
-ENV_DIR=$3
-
-# Set DO_DEPLOY as the value of the file
-[ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
-
-# If there was no file, move along
-[ -z "$DO_DEPLOY" ] && exit 0
+export_env_dir $3
 
 # If the file contents weren't "1", move along
 [ "$DO_DEPLOY" -ne "1" ] && echo "Skipping asset deployment for DO_DEPLOY != '1'" && exit 0
@@ -33,5 +40,5 @@ echo "----------> Deploying assets"
 [ -f "./node_modules/.bin/cake" ] && ./node_modules/.bin/cake assets:deploy | indent && exit 0
 
 # If it didn't exit with the assets deployment, something happened
-echo "Something went wrong with the deploy"
+echo "Something went wrong with the assets deploy"
 exit 1
