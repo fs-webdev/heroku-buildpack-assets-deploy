@@ -9,7 +9,7 @@ indent() {
 
 export_env_dir() {
   env_dir=$1
-  whitelist_regex=${2:-'^(DO_DEPLOY|TAAS_EX)$'}
+  whitelist_regex=${2:-'^(DO_DEPLOY|TAAS_EX|SIMP_CHINESE_EX)$'}
   blacklist_regex=${3:-'.^'}
   if [ -d "$env_dir" ]; then
     for e in $(ls $env_dir); do
