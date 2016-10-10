@@ -29,10 +29,6 @@ export_env_dir $3
 # If the file contents weren't "1", move along
 [ "$DO_DEPLOY" -ne "1" ] && echo "Skipping asset deployment for DO_DEPLOY != '1'" && exit 0
 
-# default SIMP_CHINESE_EX to false
-${SIMP_CHINESE_EX:=false}
-echo "SIMP_CHINESE_EX: $SIMP_CHINESE_EX"
-
 # Need node on the path
 PATH=$PATH:$1/vendor/node/bin
 
