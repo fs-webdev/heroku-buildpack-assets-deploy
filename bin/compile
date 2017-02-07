@@ -17,12 +17,18 @@ ENV_DIR=$3
 # Set environment variables
 [ -f "$ENV_DIR/DO_DEPLOY" ] && export "DO_DEPLOY=$(cat $ENV_DIR/DO_DEPLOY)"
 [ -f "$ENV_DIR/CDN_BASE_URL" ] && export "CDN_BASE_URL=$(cat $ENV_DIR/CDN_BASE_URL)"
+[ -f "$ENV_DIR/SIMP_CHINESE_EX" ] && export "SIMP_CHINESE_EX=$(cat $ENV_DIR/SIMP_CHINESE_EX)"
+[ -f "$ENV_DIR/TAAS_EX" ] && export "TAAS_EX=$(cat $ENV_DIR/TAAS_EX)"
 
 # If there was no file, move along
 [ -z "$DO_DEPLOY" ] && exit 0
 
 # If the file contents weren't "1", move along
 [ "$DO_DEPLOY" -ne "1" ] && echo "Skipping asset deployment for DO_DEPLOY != '1'" && exit 0
+
+# default SIMP_CHINESE_EX to false
+: "${SIMP_CHINESE_EX:=false}"
+echo "SIMP_CHINESE_EX: $SIMP_CHINESE_EX"
 
 # Need node on the path
 PATH=$PATH:$1/vendor/node/bin
