@@ -34,7 +34,7 @@ echo "SIMP_CHINESE_EX: $SIMP_CHINESE_EX"
 PATH=$PATH:$1/vendor/node/bin
 
 echo "----------> Compiling assets"
-[ -f "./node_modules/gulp/bin/gulp.js" ] && node --max_old_space_size=4096 ./node_modules/gulp/bin/gulp.js dist --cdnUrl=$CDN_BASE_URL | indent
+[ -f "./node_modules/gulp/bin/gulp.js" ] && node --max_old_space_size=5120 ./node_modules/gulp/bin/gulp.js dist --cdnUrl=$CDN_BASE_URL | indent
 
 # We have what we want
 echo "----------> Deploying assets"
