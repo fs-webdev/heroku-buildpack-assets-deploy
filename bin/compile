@@ -19,6 +19,7 @@ ENV_DIR=$3
 [ -f "$ENV_DIR/CDN_BASE_URL" ] && export "CDN_BASE_URL=$(cat $ENV_DIR/CDN_BASE_URL)"
 [ -f "$ENV_DIR/SIMP_CHINESE_EX" ] && export "SIMP_CHINESE_EX=$(cat $ENV_DIR/SIMP_CHINESE_EX)"
 [ -f "$ENV_DIR/TAAS_EX" ] && export "TAAS_EX=$(cat $ENV_DIR/TAAS_EX)"
+[ -f "$ENV_DIR/APP_OVERRIDE_LOCALES" ] && export "APP_OVERRIDE_LOCALES=$(cat $ENV_DIR/APP_OVERRIDE_LOCALES)"
 
 # If there was no file, move along
 [ -z "$DO_DEPLOY" ] && exit 0
