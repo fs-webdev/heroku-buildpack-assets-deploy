@@ -32,8 +32,10 @@ ENV_DIR=$3
 echo "SIMP_CHINESE_EX: $SIMP_CHINESE_EX"
 
 ### Send deps to Frontier Dashboard
+echo "Sending deps to Frontier Dashboard..."
 npm ls --json --depth 1 > deps.json
-curl -X POST -H "x-api-key: KrgZiZRMgxNKvH5gew3n6VBxkcradwu9lQrZe5C7" -d "$(cat ./deps.json)" https://tiagtww9kj.execute-api.us-east-1.amazonaws.com/dev/app/deploy/snapshot
+curl -X POST -H "x-api-key: KrgZiZRMgxNKvH5gew3n6VBxkcradwu9lQrZe5C7" -d "$(cat ./deps.json)" https://tiagtww9kj.execute-api.us-east-1.amazonaws.com/dev/app/deploy/snapshot | indent
+echo "done."
 
 # Need node on the path
 PATH=$PATH:$1/vendor/node/bin
