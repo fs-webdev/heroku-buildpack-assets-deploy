@@ -46,7 +46,7 @@ if [ -f $1/package.json ]; then
   printf "BUILD DIR files: $(ls -la $BUILD_DIR)\n"
   printf "Scanning deps... " && npm ls --json --prefix ${BUILD_DIR} > ${BUILD_DIR}/deps.json && printf "Done.\n"
   printf "Flattening deps... " && BUILD_DIR=${BUILD_DIR} BP_DIR=${BP_DIR} node ${BP_DIR}/bin/flatten-deps.js && printf "Done.\n"
-  printf "Sending deps to Frontier Dashboard... " curl -X POST -H "x-api-key: KrgZiZRMgxNKvH5gew3n6VBxkcradwu9lQrZe5C7" -d "$(cat ./deps.json.flat)" https://tiagtww9kj.execute-api.us-east-1.amazonaws.com/dev/app/deploy/snapshot && printf "Done.\n"
+  printf "Sending deps to Frontier Dashboard... " curl -X POST -H "x-api-key: KrgZiZRMgxNKvH5gew3n6VBxkcradwu9lQrZe5C7" -d "$(cat $BUILD_DIR/deps.json.flat)" https://tiagtww9kj.execute-api.us-east-1.amazonaws.com/dev/app/deploy/snapshot && printf "Done.\n"
   printf "Done with Frontier Dashboard steps\n"
 fi
 
