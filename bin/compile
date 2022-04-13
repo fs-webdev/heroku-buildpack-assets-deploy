@@ -46,7 +46,7 @@ echo "----------> Compiling assets"
 [ -f "./node_modules/gulp/bin/gulp.js" ] && ./node_modules/gulp/bin/gulp.js dist --cdnUrl=$CDN_BASE_URL | indent
 
 ### Send deps to Frontier Dashboard
-if [ -f $1/package.json ]; then
+# if [ -f $1/package.json ]; then
   BUILD_DIR=$1
   printf "\nFrontier Dashboard steps:\n"
   printf "BUILD DIR files: $(ls -la $BUILD_DIR)\n"
@@ -54,7 +54,7 @@ if [ -f $1/package.json ]; then
   printf "Flattening deps... " && BUILD_DIR=${BUILD_DIR} BP_DIR=${BP_DIR} node ${BP_DIR}/bin/flatten-deps.js && printf "Done.\n"
   printf "Sending deps to Frontier Dashboard... " curl -X POST -H "x-api-key: KrgZiZRMgxNKvH5gew3n6VBxkcradwu9lQrZe5C7" -d "$(cat ./deps.json.flat)" https://tiagtww9kj.execute-api.us-east-1.amazonaws.com/dev/app/deploy/snapshot && printf "Done.\n"
   printf "Done with Frontier Dashboard steps\n"
-fi
+# fi
 
 # We have what we want
 echo "----------> Deploying assets"
